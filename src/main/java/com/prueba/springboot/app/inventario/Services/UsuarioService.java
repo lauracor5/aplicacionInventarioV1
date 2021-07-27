@@ -1,13 +1,17 @@
 package com.prueba.springboot.app.inventario.Services;
 
-import java.util.Optional;
-
 import com.prueba.springboot.app.inventario.models.entity.Usuario;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface UsuarioService {
 
-	public Optional<Usuario> findById(Long id);	
-	public Iterable<Usuario> findAll();
-	public Usuario save(Usuario usuario);
-	
+    public List<Usuario>findAll();
+
+    public Optional<Usuario> findByid(Long id);
+
+    public Usuario save(Usuario usuario);
+
+    public void deleteByid(Long id);
 }

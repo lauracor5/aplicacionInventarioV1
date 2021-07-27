@@ -7,15 +7,14 @@ import com.prueba.springboot.app.inventario.models.entity.Mercancia;
 
 public interface MercanciaService {
 
-	
-	public Iterable<Mercancia> findAll();
-	
-	public Optional<Mercancia> findByid(Long id);
-	
-	 List<Mercancia> findByNombreProducto(String nombreProducto);
-	
-	public Mercancia save(Mercancia mercanica);
-	
-	public void deleteByid(Long id);
-	
+    public List<Mercancia>findAll();
+
+    public Optional<Mercancia>findById(Long id);
+
+    public Optional<Mercancia>findByName(String nombre);
+
+    public Mercancia save(Mercancia mercancia);
+
+    public void deleteByid(Long idMercancia, Long idUsuario);
+
 }

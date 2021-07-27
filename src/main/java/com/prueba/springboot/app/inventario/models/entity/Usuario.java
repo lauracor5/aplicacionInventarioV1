@@ -1,100 +1,110 @@
 package com.prueba.springboot.app.inventario.models.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.Objects;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String nombre;
+    private String nombre;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Cargo cargo;
+    private Integer edad;
 
-	@Column(name = "fecha_ingreso")
-	@Temporal(TemporalType.DATE)
-	private Date fechaIngreso;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_ingreso")
+    private Date fechaIngreso;
 
-	
-	@OneToMany(mappedBy = "usuarioRegistro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Mercancia> mercancias;
+    @OneToMany(mappedBy = "usuarioRegistro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Mercancia> mercanciasRegistradas;
 
-	public Usuario() {
-		mercancias = new ArrayList<>();
-	}
-	
-	@PrePersist
-	public void prePersist() {
-		this.fechaIngreso = new Date();
-	}
+    @OneToMany(mappedBy = "usuarioModificacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Mercancia> mercanciasActualizadas;
 
-	public Long getId() {
-		return id;
-	}
+    public Usuario(Long id, String nombre, Integer edad){
+        this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
+        mercanciasRegistradas = new ArrayList<>();
+        mercanciasActualizadas = new ArrayList<>();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Usuario(){
 
-	public String getNombre() {
-		return nombre;
-	}
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    @PrePersist
+    public void prePersist(){
+        fechaIngreso = new Date();
+    }
 
-	public Cargo getCargo() {
-		return cargo;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Date getFechaIngreso() {
-		return fechaIngreso;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public List<Mercancia> getMercancias() {
-		return mercancias;
-	}
-	
+    public Integer getEdad() {
+        return edad;
+    }
 
-	public void setMercancias(List<Mercancia> mercancias) {
-		this.mercancias = mercancias;
-	}
-	
-	public void addMercancia(Mercancia mercancia) {
-		mercancias.add(mercancia);
-	}
-	
-	public void removeMercancia(Mercancia mercancia) {
-		mercancias.remove(mercancia);
-	}
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
 
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public List<Mercancia> getMercanciasRegistradas() {
+        return mercanciasRegistradas;
+    }
+
+    public void setMercanciasRegistradas(List<Mercancia> mercanciasRegistradas) {
+        this.mercanciasRegistradas = mercanciasRegistradas;
+    }
+
+    public List<Mercancia> getMercanciasActualizadas() {
+        return mercanciasActualizadas;
+    }
+
+    public void setMercanciasActualizadas(List<Mercancia> mercanciasActualizadas) {
+        this.mercanciasActualizadas = mercanciasActualizadas;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(nombre, usuario.nombre) && Objects.equals(edad, usuario.edad) && Objects.equals(fechaIngreso, usuario.fechaIngreso) && Objects.equals(mercanciasRegistradas, usuario.mercanciasRegistradas) && Objects.equals(mercanciasActualizadas, usuario.mercanciasActualizadas);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, edad, fechaIngreso, mercanciasRegistradas, mercanciasActualizadas);
+    }
 }

@@ -1,19 +1,10 @@
 package com.prueba.springboot.app.inventario.models.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import java.util.Objects;
 
 @Entity
 @Table(name = "mercancias")
@@ -23,25 +14,36 @@ public class Mercancia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nombre_producto")
-	private String nombreProducto;
+	private String nombre;
+	private Integer cantidad;
 
-	private Integer Cantidad;
-
-	@Column(name = "fecha_ingreso")
 	@Temporal(TemporalType.DATE)
+	@Column (name = "fecha_ingreso")
 	private Date fechaIngreso;
-	
-	@Column(name = "fecha_modificacion")
+
 	@Temporal(TemporalType.DATE)
+	@Column (name = "fecha_modificacion")
 	private Date fechaModificacion;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario usuarioRegistro;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Usuario usuarioModificación;
-	
+	private Usuario usuarioModificacion;
+
+	public Mercancia(Long id, String nombre, Integer cantidad, Date fechaIngreso, Date fechaModificacion, Usuario usuarioRegistro, Usuario usuarioModificacion) {
+		this.id = id;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaModificacion = fechaModificacion;
+		this.usuarioRegistro = usuarioRegistro;
+		this.usuarioModificacion = usuarioModificacion;
+	}
+
+	public Mercancia(){
+
+	}
 
 	public Long getId() {
 		return id;
@@ -51,20 +53,20 @@ public class Mercancia {
 		this.id = id;
 	}
 
-	public String getNombreProducto() {
-		return nombreProducto;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreProducto(String nombreProducto) {
-		this.nombreProducto = nombreProducto;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Integer getCantidad() {
-		return Cantidad;
+		return cantidad;
 	}
 
 	public void setCantidad(Integer cantidad) {
-		Cantidad = cantidad;
+		this.cantidad = cantidad;
 	}
 
 	public Date getFechaIngreso() {
@@ -74,7 +76,6 @@ public class Mercancia {
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-
 
 	public Date getFechaModificacion() {
 		return fechaModificacion;
@@ -92,26 +93,30 @@ public class Mercancia {
 		this.usuarioRegistro = usuarioRegistro;
 	}
 
-	public Usuario getUsuarioModificación() {
-		return usuarioModificación;
+	public Usuario getUsuarioModificacion() {
+		return usuarioModificacion;
 	}
 
-	public void setUsuarioModificación(Usuario usuarioModificación) {
-		this.usuarioModificación = usuarioModificación;
+	public void setUsuarioModificacion(Usuario usuarioModificacion) {
+		this.usuarioModificacion = usuarioModificacion;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) {
+		if(this == obj){
 			return true;
 		}
-		if(!(obj instanceof Mercancia)) {
+
+		if(!(obj instanceof Mercancia)){
 			return false;
 		}
-		Mercancia m = (Mercancia)obj;
-		return this.id !=null & this.id.equals(m.getId());
-	}
-	
-	
 
+		Mercancia instMercancia = (Mercancia) obj;
+		return this.id !=null && this.id.equals(instMercancia.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nombre, cantidad, fechaIngreso, fechaModificacion, usuarioRegistro, usuarioModificacion);
+	}
 }
