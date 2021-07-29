@@ -1,8 +1,11 @@
 package com.prueba.springboot.app.inventario.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,22 +16,29 @@ public class Mercancia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@NotEmpty
 	private String nombre;
+	@NotNull
 	private Integer cantidad;
 
 	@Temporal(TemporalType.DATE)
 	@Column (name = "fecha_ingreso")
+	@NotNull
 	private Date fechaIngreso;
 
 	@Temporal(TemporalType.DATE)
 	@Column (name = "fecha_modificacion")
 	private Date fechaModificacion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties(value = {"mercanciasRegistradas"})
+	@ManyToOne()
+	@JoinColumn(name = "usuario_registro_id")
+	@NotNull
 	private Usuario usuarioRegistro;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties(value = {"mercanciasActualizadas"})
+	@ManyToOne()
+	@JoinColumn(name = "usuario_modificacion_id")
 	private Usuario usuarioModificacion;
 
 	public Mercancia(Long id, String nombre, Integer cantidad, Date fechaIngreso, Date fechaModificacion, Usuario usuarioRegistro, Usuario usuarioModificacion) {

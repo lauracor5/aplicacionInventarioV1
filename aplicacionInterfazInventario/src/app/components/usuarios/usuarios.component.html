@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Usuarios</h3>
+        </div>
+    </div>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Fecha Ingreso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <th scope="row">{{usuario.id}}</th>
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.edad}}</td>
+        <td>{{usuario.fechaIngreso}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

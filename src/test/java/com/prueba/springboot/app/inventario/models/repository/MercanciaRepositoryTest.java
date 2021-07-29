@@ -50,7 +50,7 @@ class MercanciaRepositoryTest {
 
     @Test
     void testFindAll() {
-        List<Mercancia>lsitaMercancias = mercanciaRepository.findAll();
+        List<Mercancia>lsitaMercancias = (List<Mercancia>) mercanciaRepository.findAll();
         assertFalse(lsitaMercancias.isEmpty());
         assertEquals(1, lsitaMercancias.size());
     }

@@ -1,8 +1,11 @@
 package com.prueba.springboot.app.inventario.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,29 +19,37 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String nombre;
 
+    @NotNull
     private Integer edad;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_ingreso")
+    @NotNull
     private Date fechaIngreso;
 
-    @OneToMany(mappedBy = "usuarioRegistro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {"usuarioRegistro"}, allowSetters = true)
+    @OneToMany(mappedBy = "usuarioRegistro", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Mercancia> mercanciasRegistradas;
 
-    @OneToMany(mappedBy = "usuarioModificacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {"usuarioModificacion"},  allowSetters = true)
+    @OneToMany(mappedBy = "usuarioModificacion",  orphanRemoval = true)
     private List<Mercancia> mercanciasActualizadas;
 
     public Usuario(Long id, String nombre, Integer edad){
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
-        mercanciasRegistradas = new ArrayList<>();
-        mercanciasActualizadas = new ArrayList<>();
+//        mercanciasRegistradas = new ArrayList<>();
+//        mercanciasActualizadas = new ArrayList<>();
     }
 
+
     public Usuario(){
+        mercanciasRegistradas = new ArrayList<>();
+        mercanciasActualizadas = new ArrayList<>();
 
     }
 
