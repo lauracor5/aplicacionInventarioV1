@@ -4,22 +4,42 @@
             <h3>Usuarios</h3>
         </div>
     </div>
-  <table class="table table-hover table-striped">
+    <button class="btn btn-primary my-2" routerLink="/usuarios/form">crear</button>
+    <div class="alert alert-info" *ngIf="usuarios?.length ==0">
+        No hay Usuarios en el sistema
+    </div>
+  <table class="table table-hover table-striped" *ngIf="usuarios?.length > 0">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Nombre</th>
         <th scope="col">Edad</th>
         <th scope="col">Fecha Ingreso</th>
+        <th scope="col">Editar</th>
+        <!-- <th scope="col">Eliminar</th> -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let usuario of usuarios">
         <th scope="row">{{usuario.id}}</th>
-        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.nombre }}</td>
         <td>{{usuario.edad}}</td>
-        <td>{{usuario.fechaIngreso}}</td>
+        <td>{{usuario.fechaIngreso | date:'yyyy-MM-dd'}}</td>
+        <td>
+          <button class="btn btn-secondary btn-sm" [routerLink]="['/usuarios/form', usuario.id]">editar</button>
+        </td>
+        <!-- <td>
+          <button class="btn btn-secondary btn-danger" (click)="eliminar(usuario)" >eliminar</button></td> -->
       </tr>
     </tbody>
   </table>
+  <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]= "paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              (page) = "paginar($event)"
+              showFirstLastButtons
+              class="float-start">
+  </mat-paginator>
+
 </div>

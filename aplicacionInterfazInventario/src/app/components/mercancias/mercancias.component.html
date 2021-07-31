@@ -1,1 +1,29 @@
-<p>mercancias works!</p>
+<div class="container">
+    <div class="card-header">
+         <h3>Mercancias</h3>   
+    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Fecha Ingreso</th> 
+                <th scope="col">Fecha Modificación</th> 
+                <th scope="col">Usuario Registro</th> 
+                <th scope="col">Usuario Modificación</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mercancia of mercancias">
+                <td>{{mercancia.id}}</td>
+                <td>{{mercancia.nombre}}</td>
+                <td>{{mercancia.cantidad}}</td>
+                <td>{{mercancia.fechaIngreso}}</td>
+                <td>{{mercancia.fechaModificacion}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

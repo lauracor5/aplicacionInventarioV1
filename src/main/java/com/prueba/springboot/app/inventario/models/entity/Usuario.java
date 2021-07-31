@@ -31,11 +31,11 @@ public class Usuario {
     private Date fechaIngreso;
 
     @JsonIgnoreProperties(value = {"usuarioRegistro"}, allowSetters = true)
-    @OneToMany(mappedBy = "usuarioRegistro", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuarioRegistro", orphanRemoval = true)
     private List<Mercancia> mercanciasRegistradas;
 
     @JsonIgnoreProperties(value = {"usuarioModificacion"},  allowSetters = true)
-    @OneToMany(mappedBy = "usuarioModificacion",  orphanRemoval = true)
+    @OneToMany(mappedBy = "usuarioModificacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mercancia> mercanciasActualizadas;
 
     public Usuario(Long id, String nombre, Integer edad){
@@ -95,7 +95,10 @@ public class Usuario {
     }
 
     public void setMercanciasRegistradas(List<Mercancia> mercanciasRegistradas) {
-        this.mercanciasRegistradas = mercanciasRegistradas;
+        this.mercanciasRegistradas.clear();
+        this.mercanciasRegistradas.forEach(p -> {
+            this.addMercanciaRegistradas(p);
+        });
     }
 
     public List<Mercancia> getMercanciasActualizadas() {
@@ -103,7 +106,31 @@ public class Usuario {
     }
 
     public void setMercanciasActualizadas(List<Mercancia> mercanciasActualizadas) {
-        this.mercanciasActualizadas = mercanciasActualizadas;
+        this.mercanciasActualizadas.clear();
+        this.mercanciasActualizadas.forEach(p -> {
+            this.addMercanciaActualizadas(p);
+        });
+
+    }
+
+    public void addMercanciaRegistradas(Mercancia mercancia){
+        mercanciasRegistradas.add(mercancia);
+        mercancia.setUsuarioRegistro(this);
+    }
+
+    public void removeMercanciaRegistraas(Mercancia mercancia){
+        mercanciasRegistradas.remove(mercancia);
+        mercancia.setUsuarioRegistro(null);
+    }
+
+    public void addMercanciaActualizadas(Mercancia mercancia){
+        mercanciasActualizadas.add(mercancia);
+        mercancia.setUsuarioModificacion(this);
+    }
+
+    public void removeMercanciaActualizada(Mercancia mercancia){
+        mercanciasActualizadas.remove(mercancia);
+        mercancia.setUsuarioModificacion(null);
     }
 
     @Override

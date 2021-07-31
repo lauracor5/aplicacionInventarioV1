@@ -2,6 +2,7 @@ package com.prueba.springboot.app.inventario.controllers;
 
 import com.prueba.springboot.app.inventario.Services.UsuarioService;
 import com.prueba.springboot.app.inventario.models.entity.Usuario;
+import io.swagger.v3.oas.annotations.headers.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin({"http://localhost:4200"})
+@CrossOrigin(value = {"http://localhost:4200"}, allowedHeaders = {"Content-Type"})
 @RequestMapping("/api/inventario/usuario")
 @RestController
 public class UsuarioController {
@@ -63,6 +64,13 @@ public class UsuarioController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuarioDb));
     }
+
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?>eliminar(@PathVariable  Long id){
+//        usuarioService.deleteByid(id);
+//        return  ResponseEntity.noContent().build();
+//
+//    }
 
     private ResponseEntity<?> validar(BindingResult result) {
         Map<String, Object> errores = new HashMap<>();

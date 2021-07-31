@@ -16,7 +16,7 @@ import com.prueba.springboot.app.inventario.models.entity.Mercancia;
 
 import javax.validation.Valid;
 
-
+@CrossOrigin({"*"})
 @RequestMapping("/api/inventario/mercancia")
 @RestController
 public class MercanciaController {

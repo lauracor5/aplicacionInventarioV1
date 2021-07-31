@@ -30,15 +30,16 @@ public class Mercancia {
 	@Column (name = "fecha_modificacion")
 	private Date fechaModificacion;
 
-	@JsonIgnoreProperties(value = {"mercanciasRegistradas"})
+
 	@ManyToOne()
 	@JoinColumn(name = "usuario_registro_id")
+	@JsonIgnoreProperties(value = {"mercanciasRegistradas"})
 	@NotNull
 	private Usuario usuarioRegistro;
 
-	@JsonIgnoreProperties(value = {"mercanciasActualizadas"})
 	@ManyToOne()
 	@JoinColumn(name = "usuario_modificacion_id")
+	@JsonIgnoreProperties(value = {"mercanciasActualizadas"},  allowSetters = true)
 	private Usuario usuarioModificacion;
 
 	public Mercancia(Long id, String nombre, Integer cantidad, Date fechaIngreso, Date fechaModificacion, Usuario usuarioRegistro, Usuario usuarioModificacion) {
