@@ -6,8 +6,8 @@ export class Mercancia {
     cantidad: number;
     fechaIngreso : string;
     fechaModificacion : string;
-    usuarioRegistro: Usuario[] = [];
-    usuarioModificacion: Usuario[] = [];
+    usuarioRegistro: Usuario;
+    usuarioModificacion: Usuario;
 
 
 }

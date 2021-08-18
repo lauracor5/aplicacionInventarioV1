@@ -3,11 +3,6 @@ export class Usuario{
     nombre:string; 
     edad:number;
     fechaIngreso:string; 
-
-    
-
-    
-
     
  
 }

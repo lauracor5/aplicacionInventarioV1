@@ -20,7 +20,7 @@
                         {{error.edad}}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="!usuario.id" >
                     <label for="fechaIngreso my-2">Fecha Ingreso</label>
                     <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control my-2"
                     [(ngModel)]= "usuario.fechaIngreso" />

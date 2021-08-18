@@ -9,14 +9,16 @@ import { FormsModule }from '@angular/forms';
 import { HttpClientModule }from '@angular/common/http';
 import { UsuariosFormComponent } from './components/usuarios/usuarios-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MercanciaFormComponent } from './components/mercancias/mercancia-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuariosComponent,
     MercanciasComponent,
-    UsuariosFormComponent
+    UsuariosFormComponent,
+    MercanciaFormComponent,
   ],
   imports: [
     BrowserModule,

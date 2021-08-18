@@ -51,17 +51,21 @@ public class MercanciaServiceImpl implements MercanciaService {
     @Override
     @Transactional
     public Mercancia save(Mercancia mercancia) {
-        //Obtenemos mercancia por nombre
-         Optional<Mercancia> optMercanciaIngresar = findByName(mercancia.getNombre());
-        //Buscamos si la mercancia existe con el nombre que se ingresa
-        if(!optMercanciaIngresar.isEmpty()){
-            throw new ExceptionNegocio("Nombre de producto ya existe");
+
+        if (mercancia.getId() == null) {
+            //Obtenemos mercancia por nombre
+            Optional<Mercancia> optMercanciaIngresar = findByName(mercancia.getNombre());
+            //Buscamos si la mercancia existe con el nombre que se ingresa
+            if (!optMercanciaIngresar.isEmpty()) {
+                throw new ExceptionNegocio("Nombre de producto ya existe");
+            }
         }
 
-        if(!(mercancia.getFechaIngreso() == null)){
+
+        if (!(mercancia.getFechaIngreso() == null)) {
             evaluaFechas(mercancia.getFechaIngreso());
         }
-        if(!(mercancia.getFechaModificacion() == null)){
+        if (!(mercancia.getFechaModificacion() == null)) {
             evaluaFechas(mercancia.getFechaModificacion());
         }
         return repository.save(mercancia);
@@ -79,7 +83,7 @@ public class MercanciaServiceImpl implements MercanciaService {
         repository.deleteById(idMercancia);
     }
 
-    private Date evaluaFechas(Date fecha){
+    private Date evaluaFechas(Date fecha) {
         if (fecha.after(new Date())) {
             throw new ExceptionNegocio("la fecha que ingresó es mayor a la fecha actual");
         }
