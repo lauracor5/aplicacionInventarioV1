@@ -72,7 +72,7 @@ public class MercanciaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(mercanciaService.save(mercanciaBD));
     }
 
-    @DeleteMapping("/{idMercancia}")
+    @DeleteMapping("/{idMercancia}/{idUsuario}")
     public ResponseEntity<?> eliminar(@PathVariable Long idMercancia, @PathVariable Long idUsuario) {
         mercanciaService.deleteByid(idMercancia, idUsuario);
         return ResponseEntity.noContent().build();

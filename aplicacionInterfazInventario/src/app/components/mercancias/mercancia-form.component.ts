@@ -62,6 +62,19 @@ export class MercanciaFormComponent implements OnInit {
     });
   }
 
+  public compararMercancia = (m1: Mercancia, m2: Mercancia):boolean =>{
+
+    console.log('Compara mercancia')
+    console.log(m1)
+    console.log(m2)
+    if(m1 === undefined && m2 === undefined)
+    return true;
+
+    return m1 === null || m2 === null || m1 === undefined || m2 === undefined ? false : m1.id === m2.id;
+  }
+
+    
+
 }
 
 

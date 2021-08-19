@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MercanciaBorrarFormComponent } from './components/mercancias/mercancia-borrar-form.component';
 import { MercanciaFormComponent } from './components/mercancias/mercancia-form.component';
 import { MercanciasComponent } from './components/mercancias/mercancias.component';
 import { UsuariosFormComponent } from './components/usuarios/usuarios-form.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'mercancias', component:MercanciasComponent},
   {path: 'mercancias/form', component:MercanciaFormComponent},
   {path: 'mercancias/form/:id', component:MercanciaFormComponent},
+  {path: 'mercanciasBorrar/form/:id', component:MercanciaBorrarFormComponent}
 
 
 ];

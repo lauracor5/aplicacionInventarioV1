@@ -26,11 +26,11 @@
                 <td>{{mercancia.fechaIngreso}}</td>
                 <td>{{mercancia.fechaModificacion}}</td>
                 <td>{{mercancia.usuarioRegistro.nombre}}</td>
-                <td></td>
+                <td>{{mercancia.usuarioModificacion?.nombre}}</td>
                 <td><button class="btn btn-secondary btn-sm"
                         [routerLink]="['/mercancias/form', mercancia.id]">Editar</button></td>
                 <td><button class="btn btn-danger btn-sm"
-                        [routerLink]="['/mercancias/form', mercancia.id]">Eliminar</button></td>
+                        [routerLink]="['/mercanciasBorrar/form', mercancia.id]">Eliminar</button></td>
             </tr>
         </tbody>
     </table>

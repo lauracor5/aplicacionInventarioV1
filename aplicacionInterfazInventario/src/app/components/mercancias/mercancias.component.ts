@@ -44,7 +44,6 @@ export class MercanciasComponent implements OnInit {
     .subscribe(p => {
       this.mercancias = p.content as Mercancia[];
       console.log(this.mercancias);
-      this.validaUsuarioModificacionNull();
       console.log('valor de p', p);
       this.totalRegistros = p.totalElements as number;
       this.paginator._intl.itemsPerPageLabel = 'registros por pagina'
@@ -52,19 +51,7 @@ export class MercanciasComponent implements OnInit {
   }
 
 
-  private validaUsuarioModificacionNull = () => {
-    for(let i = 0; i < this.mercancias.length; i++) {
-        if(this.mercancias[i].usuarioModificacion?.nombre === null){
-          this.nombreUsuarioModificacion = '';
-        }else{
-          this.nombreUsuarioModificacion = this.mercancias[i].usuarioModificacion?.nombre;
-        }
-   }
-
-   console.log('usuario mod', this.nombreUsuarioModificacion)
-
-   return this.nombreUsuarioModificacion;
-}
+  
 
 
 }

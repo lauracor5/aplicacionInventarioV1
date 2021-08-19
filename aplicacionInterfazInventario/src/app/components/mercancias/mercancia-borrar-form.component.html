@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card text-dark bg-light mb-3">
+        <div class="card-header">
+            {{titulo}}
+        </div>
+        <div class="card-body">
+            <button class="btn btn-secondary my-2" routerLink = "/mercancias">volver</button>
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <label  class="form-control">{{mercancia.nombre}}</label>
+                </div>
+                <div class="form-group">
+                    <label for="usuarioEliminaRegistro"></label>
+                    <select name="usuarioEliminaRegistro" id="usuarioEliminaRegistro" class="form-control" [(ngModel)] = "mercancia.usuarioRegistro" >
+                        <option [ngValue] = "undefined">---Seleccione un registro---</option>
+                        <option *ngFor = "let usuarioRegistraEliminacion of usuariosRegistraEliminacion" [ngValue] = "usuarioRegistraEliminacion">{{usuarioRegistraEliminacion.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <button class="btn btn-danger " (click) = "eliminar(mercancia)">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

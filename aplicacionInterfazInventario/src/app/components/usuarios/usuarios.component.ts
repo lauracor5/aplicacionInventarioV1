@@ -17,6 +17,7 @@ export class UsuariosComponent implements OnInit {
   paginaActual = 0; 
   totalPorPagina = 4; 
   pageSizeOptions: number [] = [3, 5, 10, 25, 100];
+  nombreUsuarioModificacion = '';
 
   @ViewChild(MatPaginator)paginator: MatPaginator;
 
@@ -38,6 +39,7 @@ export class UsuariosComponent implements OnInit {
     .subscribe(p => 
       {
       this.usuarios = p.content as Usuario[];
+      console.log('pppp', p.content)
       this.totalRegistros = p.totalElements as number;
       this.paginator._intl.itemsPerPageLabel = 'registros por página'
     });

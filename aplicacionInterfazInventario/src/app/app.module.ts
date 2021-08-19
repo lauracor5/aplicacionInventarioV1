@@ -11,6 +11,7 @@ import { UsuariosFormComponent } from './components/usuarios/usuarios-form.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MercanciaFormComponent } from './components/mercancias/mercancia-form.component';
+import { MercanciaBorrarFormComponent } from './components/mercancias/mercancia-borrar-form.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MercanciaFormComponent } from './components/mercancias/mercancia-form.c
     MercanciasComponent,
     UsuariosFormComponent,
     MercanciaFormComponent,
+    MercanciaBorrarFormComponent,
   ],
   imports: [
     BrowserModule,

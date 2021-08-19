@@ -41,6 +41,9 @@ export class UsuariosFormComponent implements OnInit {
       if(err.status === 400){
         this.error = err.error;
         console.log(this.error);
+      }else if(err.status === 500){
+        this.error = err.error;
+        console.log('error 500' + err);
       }
     });
   }

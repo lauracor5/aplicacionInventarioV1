@@ -30,11 +30,11 @@ public class Usuario {
     @NotNull
     private Date fechaIngreso;
 
-    @JsonIgnoreProperties(value = {"usuarioRegistro"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"usuarioRegistro", "usuarioModificacion", "handler"}, allowSetters = true)
     @OneToMany(mappedBy = "usuarioRegistro", orphanRemoval = true)
     private List<Mercancia> mercanciasRegistradas;
 
-    @JsonIgnoreProperties(value = {"usuarioModificacion"},  allowSetters = true)
+    @JsonIgnoreProperties(value = {"usuarioModificacion", "usuarioRegistro", "handler"},  allowSetters = true)
     @OneToMany(mappedBy = "usuarioModificacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mercancia> mercanciasActualizadas;
 

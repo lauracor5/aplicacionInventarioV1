@@ -38,8 +38,8 @@ export class MercanciaService {
     return this.http.put<Mercancia>(`${this.baseEndPoint}/${mercancia.id}`, mercancia, { headers: this.cabeceras });
   }
 
-  public eliminar(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseEndPoint}/${id}`);
+  public eliminar(id: number, idUsuario: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseEndPoint}/${id}/${idUsuario}`);
   }
 
   public findAllUsuarios(): Observable<Usuario[]> {
